@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>2ª Série - Santo Isidoro | Tecnologia e Fé</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --tech-cyan: #00e5ff;
+      --tech-cyan-light: #7df3ff;
+      --tech-gold: #ffd700;
+      --tech-gold-soft: #f3c64f;
+
+      --tech-blue-900: #020a1f;
+      --tech-blue-800: #04122e;
+      --tech-blue-700: #081c47;
+      --tech-blue-600: #0d2a6b;
+      --tech-blue-500: #1e6bff;
+
+      --tech-text: #e6eefc;
+      --tech-text-soft: #9fb4d3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding-top: 70px;
+      max-width: 100%;
+      overflow-x: hidden;
+      color: var(--tech-text);
+      background-color: var(--tech-blue-900);
+      background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(30, 107, 255, .28) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 45%, rgba(255, 215, 0, .10) 0%, transparent 50%),
+        linear-gradient(180deg, var(--tech-blue-800) 0%, var(--tech-blue-900) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--tech-cyan-light);
+      outline-offset: 2px;
+    }
+
+    .navbar-santos {
+      min-height: 70px;
+      background: linear-gradient(90deg, var(--tech-blue-800) 0%, var(--tech-blue-700) 55%, var(--tech-blue-600) 100%);
+      border-bottom: 2px solid var(--tech-gold-soft);
+      box-shadow: 0 4px 24px rgba(0, 229, 255, .15);
+    }
+
+    .navbar-brand { display: flex; align-items: center; padding: 0; }
+
+    .logo-navbar, .navbar-brand img {
+      display: block;
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--tech-gold);
+      box-shadow: 0 0 14px rgba(255, 215, 0, .45);
+    }
+
+    .navbar .nav-link {
+      color: var(--tech-cyan);
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: .5rem .9rem;
+      border-radius: 6px;
+      transition: color .2s, background-color .2s;
+    }
+
+    .navbar .nav-link:hover, .navbar .nav-link:focus, .navbar .nav-link.active {
+      color: var(--tech-gold);
+      background-color: rgba(30, 107, 255, .35);
+    }
+
+    .navbar-toggler { border-color: var(--tech-gold); }
+
+    .btn-acao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .55rem 1.2rem;
+      font-size: .85rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+      color: #fff;
+      background: linear-gradient(180deg, var(--tech-blue-500) 0%, #0f4fd6 100%);
+      border: 1px solid var(--tech-gold);
+      border-radius: 8px;
+      transition: transform .15s, box-shadow .15s, background .15s;
+      text-decoration: none;
+    }
+
+    .btn-acao:hover, .btn-acao:focus {
+      color: #020a1f;
+      background: linear-gradient(180deg, var(--tech-gold) 0%, var(--tech-gold-soft) 100%);
+      box-shadow: 0 4px 14px rgba(255, 215, 0, .45);
+      transform: translateY(-1px);
+    }
+
+    .header-foto {
+      background-image: url('images/banner-santos.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      aspect-ratio: 21 / 5;
+      min-height: 150px;
+      border-bottom: 2px solid var(--tech-gold);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, .15);
+    }
+
+    .titulo-destaque {
+      color: var(--tech-gold);
+      font-weight: 700;
+      text-shadow: 0 0 18px rgba(255, 215, 0, .35);
+    }
+
+    .texto-suave { color: var(--tech-text-soft); }
+
+    .card-santo {
+      background-color: var(--tech-blue-800);
+      border: 1px solid var(--tech-cyan);
+      border-radius: 12px;
+      box-shadow: 0 0 22px rgba(0, 229, 255, .10);
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card-santo:hover {
+      transform: translateY(-3px);
+      border-color: var(--tech-gold);
+    }
+
+    @media (max-width: 991.98px) {
+      body { padding-top: 65px; }
+      .navbar-santos { min-height: 65px; }
+      .logo-navbar, .navbar-brand img { width: 48px; height: 48px; }
+    }
+  </style>
+</head>
+
+<body data-bs-theme="dark">
+
+  <nav class="navbar navbar-expand-lg navbar-santos fixed-top text-uppercase">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.santos.jpg" alt="Logo Santos Católicos" class="logo-navbar">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir Menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="carlo-acutis.html">Carlo Acutis</a></li>
+          <li class="nav-item"><a class="nav-link active" href="isidoro.html" aria-current="page">Isidoro de Sevilha</a></li>
+          <li class="nav-item"><a class="nav-link" href="sao-gabriel.html">São Gabriel Arcanjo</a></li>
+        </ul>
+        <a href="https://www.vatican.va" class="btn btn-acao" target="_blank" rel="noopener noreferrer">Vaticano</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="header-foto" role="img" aria-label="Banner Santos Católicos"></header>
+
+  <main class="container py-5">
+    <p class="text-uppercase small fw-semibold titulo-destaque mb-2">Padroeiro dos Pesquisadores e da Internet</p>
+    <h1 class="display-5 fw-bold mb-3">SANTO ISIDORO DE SEVILHA - O ARQUITETO DO SABER</h1>
+    <p class="texto-suave lead mb-5">
+      Reconhecido como o criador da primeira grande enciclopédia da história, Santo Isidoro estruturou todo o conhecimento humano de sua época, inspirando a lógica dos modernos bancos de dados.
+    </p>
+
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <div class="card card-santo p-4 h-100">
+          <h3 class="titulo-destaque h4 mb-3">📚 A OBRA E AS ETIMOLOGIAS</h3>
+          <ul class="texto-suave mb-0 lh-lg">
+            <li><strong>Organização de Dados:</strong> Compilou o saber universal em categorias estruturadas, precursora dos sistemas de indexação de arquivos.</li>
+            <li><strong>Amor à Sabedoria:</strong> Defendia que o estudo e a busca pelo conhecimento científico e teológico caminham lado a lado com a fé.</li>
+            <li><strong>Visão Universal:</strong> Suas obras foram copiadas e estudadas por séculos em bibliotecas e universidades de todo o mundo cristão.</li>
+            <li><strong>Protetor da Informática:</strong> Indicado pelo Vaticano como patrono dos internautas devido ao seu esforço titânico de catalogação da informação.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card card-santo p-4 h-100">
+          <h3 class="titulo-destaque h4 mb-3">🔍 ORGANIZAÇÃO NA REDE</h3>
+          <p class="texto-suave">
+            Assim como Isidoro organizou os livros e pergaminhos para facilitar o acesso ao saber, os desenvolvedores modernos organizam dados em tabelas e servidores para conectar o mundo digital.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

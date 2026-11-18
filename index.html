@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Santos Católicos | Tecnologia e Fé</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --tech-cyan: #00e5ff;
+      --tech-cyan-light: #7df3ff;
+      --tech-gold: #ffd700;
+      --tech-gold-soft: #f3c64f;
+
+      --tech-blue-900: #020a1f;
+      --tech-blue-800: #04122e;
+      --tech-blue-700: #081c47;
+      --tech-blue-600: #0d2a6b;
+      --tech-blue-500: #1e6bff;
+
+      --tech-text: #e6eefc;
+      --tech-text-soft: #9fb4d3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding-top: 70px; /* Altura ajustada para evitar excesso de espaço no topo */
+      max-width: 100%;
+      overflow-x: hidden;
+      color: var(--tech-text);
+      background-color: var(--tech-blue-900);
+      background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(30, 107, 255, .28) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 45%, rgba(255, 215, 0, .10) 0%, transparent 50%),
+        linear-gradient(180deg, var(--tech-blue-800) 0%, var(--tech-blue-900) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--tech-cyan-light);
+      outline-offset: 2px;
+    }
+
+    .navbar-santos {
+      min-height: 70px;
+      background: linear-gradient(90deg, var(--tech-blue-800) 0%, var(--tech-blue-700) 55%, var(--tech-blue-600) 100%);
+      border-bottom: 2px solid var(--tech-gold-soft);
+      box-shadow: 0 4px 24px rgba(0, 229, 255, .15);
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    .logo-navbar,
+    .navbar-brand img {
+      display: block;
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--tech-gold);
+      box-shadow: 0 0 14px rgba(255, 215, 0, .45);
+    }
+
+    .navbar .nav-link {
+      color: var(--tech-cyan);
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: .5rem .9rem;
+      border-radius: 6px;
+      transition: color .2s, background-color .2s;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .nav-link:focus {
+      color: var(--tech-gold);
+      background-color: rgba(30, 107, 255, .35);
+    }
+
+    .navbar-toggler { border-color: var(--tech-gold); }
+
+    .btn-acao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: .55rem 1.2rem;
+      font-size: .85rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+      color: #fff;
+      background: linear-gradient(180deg, var(--tech-blue-500) 0%, #0f4fd6 100%);
+      border: 1px solid var(--tech-gold);
+      border-radius: 8px;
+      transition: transform .15s, box-shadow .15s, background .15s;
+      text-decoration: none;
+    }
+
+    .btn-acao:hover,
+    .btn-acao:focus {
+      color: #020a1f;
+      background: linear-gradient(180deg, var(--tech-gold) 0%, var(--tech-gold-soft) 100%);
+      box-shadow: 0 4px 14px rgba(255, 215, 0, .45);
+      transform: translateY(-1px);
+    }
+
+    /* Banner principal otimizado para evitar grandes espaços vazios */
+    .header-foto {
+      background-image: url('images/banner-santos.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      aspect-ratio: 21 / 5;
+      min-height: 150px;
+      border-bottom: 2px solid var(--tech-gold);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, .15);
+    }
+
+    .banner {
+      padding: 50px 0;
+      overflow: hidden;
+    }
+
+    .banner h1 {
+      color: #fff;
+      line-height: 1.15;
+      text-shadow: 0 0 24px rgba(30, 107, 255, .6);
+    }
+
+    .banner .text-uppercase {
+      color: var(--tech-gold);
+      letter-spacing: .06em;
+    }
+
+    .banner .lead {
+      max-width: 650px;
+      color: var(--tech-text);
+    }
+
+    /* Logo redonda flutuante com proporção exata */
+    .santos-logo {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--tech-gold);
+      filter: drop-shadow(0 8px 25px rgba(0, 229, 255, .4));
+      animation: flutuar 3s ease-in-out infinite;
+    }
+
+    @keyframes flutuar {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .titulo-destaque {
+      color: var(--tech-cyan);
+      font-weight: 700;
+      text-shadow: 0 0 18px rgba(0, 229, 255, .35);
+    }
+
+    .texto-suave { color: var(--tech-text-soft); }
+
+    #carouselSantos {
+      overflow: hidden;
+      border-radius: 12px;
+      border: 2px solid var(--tech-cyan);
+      box-shadow: 0 0 30px rgba(0, 229, 255, .15);
+    }
+
+    #carouselSantos .carousel-item img {
+      display: block;
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      background-color: var(--tech-blue-800);
+    }
+
+    #carouselSantos .carousel-caption {
+      background: rgba(2, 10, 31, 0.82);
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    #carouselSantos .carousel-indicators [data-bs-target] {
+      background-color: var(--tech-gold);
+    }
+
+    .card-group {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+      gap: 1.5rem;
+    }
+
+    .card-santo {
+      background-color: var(--tech-blue-800);
+      border: 1px solid var(--tech-cyan);
+      border-radius: 12px !important;
+      overflow: hidden;
+      box-shadow: 0 0 22px rgba(0, 229, 255, .10);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .card-santo:hover {
+      transform: translateY(-4px);
+      border-color: var(--tech-gold);
+      box-shadow: 0 8px 28px rgba(255, 215, 0, .22);
+    }
+
+    .card-santo .card-header {
+      color: var(--tech-gold);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(0, 229, 255, .45);
+      background-color: rgba(0, 229, 255, .08);
+    }
+
+    .card-santo .card-title {
+      color: var(--tech-cyan);
+      font-weight: 700;
+    }
+
+    .card-santo .card-text {
+      color: var(--tech-text);
+    }
+
+    .card-santo .card-footer {
+      background: transparent;
+      border-top: 1px solid rgba(0, 229, 255, .25);
+    }
+
+    .btn-card-santo {
+      color: var(--tech-cyan);
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--tech-cyan);
+      border-radius: 8px;
+      padding: .45rem 1rem;
+      transition: background .15s, color .15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-card-santo:hover,
+    .btn-card-santo:focus {
+      color: var(--tech-blue-900);
+      background: var(--tech-cyan);
+    }
+
+    /* Menu Lateral (Offcanvas) */
+    .offcanvas-santos {
+      background: linear-gradient(180deg, var(--tech-blue-800) 0%, var(--tech-blue-900) 100%);
+      border-right: 2px solid var(--tech-gold);
+      box-shadow: 4px 0 30px rgba(0, 229, 255, 0.2);
+      color: var(--tech-text);
+    }
+
+    .offcanvas-santos .offcanvas-header {
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+      background-color: rgba(0, 229, 255, 0.05);
+    }
+
+    .offcanvas-santos .offcanvas-title {
+      color: var(--tech-gold);
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+    }
+
+    .offcanvas-santos .btn-close {
+      filter: invert(1) drop-shadow(0 0 4px var(--tech-cyan));
+    }
+
+    .offcanvas-santos .list-group-item {
+      background-color: rgba(8, 28, 71, 0.6);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      color: var(--tech-text);
+      font-weight: 500;
+      border-radius: 8px !important;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .offcanvas-santos .list-group-item:hover {
+      background-color: rgba(0, 229, 255, 0.15);
+      color: var(--tech-gold);
+      border-color: var(--tech-gold);
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 991.98px) {
+      body { padding-top: 65px; }
+      .navbar-santos { min-height: 65px; }
+      .logo-navbar, .navbar-brand img { width: 48px; height: 48px; }
+      .banner { padding: 40px 0; text-align: center; }
+      .banner h1 { font-size: 2.1rem; }
+      #carouselSantos .carousel-item img { height: 300px; }
+    }
+  </style>
+</head>
+
+<body data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg navbar-santos fixed-top text-uppercase">
+    <div class="container">
+      <!-- Botão para acionar o offcanvas -->
+      <button class="btn btn-card-santo me-3 py-1 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offCanvasMenu" aria-controls="offCanvasMenu" title="Abrir Menu Lateral">
+        ☰
+      </button>
+
+      <a class="navbar-brand active" href="#">
+        <img src="images/logo.santos.jpg" alt="Logo Santos Católicos Tecnologia e Fé" class="logo-navbar">
+      </a>
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menuPrincipal"
+        aria-controls="menuPrincipal"
+        aria-expanded="false"
+        aria-label="Abrir Menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="carlo-acutis.html">Carlo Acutis</a></li>
+          <li class="nav-item"><a class="nav-link" href="isidoro.html">Isidoro</a></li>
+          <li class="nav-item"><a class="nav-link" href="sao-gabriel.html">Gabriel</a></li>
+        </ul>
+        <a href="#patronos" class="btn btn-acao">Conhecer Patronos</a>
+      </div>
+    </div>
+  </nav>
+  
+  <header class="header-foto" role="img" aria-label="Banner Santos Católicos Intercessores da Fé no Mundo Digital"></header>
+
+  <section class="banner">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <p class="text-uppercase small fw-semibold mb-2">Intercessores da Fé no Mundo Digital</p>
+          <h1 class="display-4 fw-bold">SANTOS CATÓLICOS & TECNOLOGIA</h1>
+          <p class="lead mb-0">
+            Inovação, fé, conexão e evangelização. Conheça a história dos santos e beatos que inspiram os cristãos
+            a usar a internet, a programação e os meios digitais como instrumentos de amor a Deus.
+          </p>
+        </div>
+        <div class="col-lg-5 text-center d-none d-lg-block">
+          <img src="images/logo.santos.jpg" alt="Emblema Santos Católicos Tecnologia e Fé" class="santos-logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container pb-5" id="evangelizacao">
+    <div id="carouselSantos" class="carousel slide" data-bs-ride="carousel" data-bs-theme="light">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselSantos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselSantos" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselSantos" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/Banner.santos.jpg" alt="Santos Católicos na Era Digital">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="text-warning fw-bold">Cibersantidade</h5>
+            <p class="mb-0 text-light">A santidade vivida no dia a dia através do bom uso das redes sociais e da tecnologia.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/carlo.acutis.jpg" alt="São Carlo Acutis e a Eucaristia">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="text-warning fw-bold">O Padroeiro da Internet</h5>
+            <p class="mb-0 text-light">Como um jovem programador usou seus conhecimentos web para catalogar milagres eucarísticos.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/isidoro.jpg" alt="Santo Isidoro de Sevilha">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="text-warning fw-bold">Conhecimento e Sabedoria</h5>
+            <p class="mb-0 text-light">Dos primeiros bancos de dados enciclopédicos da história à era da computação moderna.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselSantos" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselSantos" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Cards dos Santos / Séries -->
+  <section class="container pb-4" id="patronos">
+    <h2 class="titulo-destaque mb-4">Patronos da Era Digital</h2>
+    <div class="card-group">
+      <div class="card card-santo">
+        <div class="card-header">• Padroeiro da Internet</div>
+        <div class="card-body">
+          <h3 class="card-title h5">São Carlo Acutis</h3>
+          <p class="card-text">Jovem italiano apaixonado por computação e pela Eucaristia. Criou um site catalogando milagres eucarísticos pelo mundo e dizia: "A Eucaristia é a minha autoestrada para o Céu".</p>
+        </div>
+        <div class="card-footer">
+          <a href="carlo-acutis.html" class="btn btn-card-santo">Ver detalhes</a>
+        </div>
+      </div>
+
+      <div class="card card-santo">
+        <div class="card-header">• Padroeiro dos Pesquisadores</div>
+        <div class="card-body">
+          <h3 class="card-title h5">Santo Isidoro de Sevilha</h3>
+          <p class="card-text">Arcebispo do século VII que escreveu as "Etimologias", uma enciclopédia com todo o saber de sua época — considerada a precursora dos bancos de dados modernos.</p>
+        </div>
+        <div class="card-footer">
+          <a href="isidoro.html" class="btn btn-card-santo">Ver detalhes</a>
+        </div>
+      </div>
+
+      <div class="card card-santo">
+        <div class="card-header">• O Mensageiro Divino</div>
+        <div class="card-body">
+          <h3 class="card-title h5">São Gabriel Arcanjo</h3>
+          <p class="card-text">O mensageiro divino que anunciou a Boa Nova a Maria. É invocado como protetor de todos os profissionais de comunicação, telecomunicações e redes digitais.</p>
+        </div>
+        <div class="card-footer">
+          <a href="sao-gabriel.html" class="btn btn-card-santo">Ver detalhes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Barra Lateral (Offcanvas) -->
+  <div class="offcanvas offcanvas-start offcanvas-santos" tabindex="-1" id="offCanvasMenu" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasLabel">Fé & Tecnologia</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column justify-content-between">
+      <div>
+        <p class="texto-suave mb-3">
+          A tecnologia é um dom de Deus quando colocada a serviço da verdade, da caridade e da evangelização dos povos.
+        </p>
+
+        <hr style="border-color: rgba(255, 215, 0, 0.25);">
+
+        <h6 class="titulo-destaque mb-3 text-uppercase small fw-bold">Recursos Católicos</h6>
+        
+        <div class="list-group list-group-flush">
+          <a href="https://www.vatican.va" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">
+            🇻🇦 Site Oficial do Vaticano
+          </a>
+          <a href="http://www.miracolieucaristici.org" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">
+            ✨ Exposição Milagres Eucarísticos (Carlo Acutis)
+          </a>
+          <a href="https://www.cnbb.org.br" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">
+            ✝️ CNBB - Igreja no Brasil
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div class="p-3 rounded mb-3" style="background-color: rgba(255, 215, 0, 0.08); border: 1px dashed var(--tech-gold);">
+          <small class="texto-suave d-block text-center">"Todos nascem como originais, mas muitos morrem como fotocópias."<br><strong>— Carlo Acutis</strong></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container pb-5 text-center" id="milagres">
+    <h2 class="titulo-destaque">Santos Católicos — Tecnologia e Fé</h2>
+    <p class="texto-suave">Celebrando os patronos da era digital e a evangelização na internet</p>
+  </main>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
